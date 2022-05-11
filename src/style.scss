@@ -1,0 +1,178 @@
+/// Variables
+
+$Violet: hsl(257, 40%, 49%);
+$Soft-Magenta: hsl(300, 69%, 71%);
+
+//////////////////////////////////////////////////////////////
+///Responsive function
+@mixin respond($breakpoint) {
+  @if $breakpoint == desktop {
+    @media only screen and (min-width: 56.25em) {
+      @content;
+    } //900px
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+/// Resets
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  transition: all 0.3s;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 50%; // 1rem = 8px, 8px/16px = 50%
+
+  @include respond(desktop) {
+    //  600 < width?
+    font-size: 62.5%; //1 rem = 10px, 10/16 = 62.5%
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+/// Typography
+
+@font-face {
+  font-family: "iran-sans";
+  src: url("/src/fonts/IRANSansWeb.ttf");
+}
+@font-face {
+  font-family: "IRANSansWeb(FaNum)";
+  src: url("/src/fonts/IRANSansWeb\(FaNum\).ttf");
+}
+.fa-num {
+  font-family: "IRANSansWeb(FaNum)";
+}
+
+body {
+  font-family: "iran-sans", sans-serif;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.6rem;
+  line-height: 3rem;
+  font-weight: 400;
+}
+
+//////////main styles
+.container {
+  width: 80%;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.hero {
+  background-image: url("/src/images/bg-mobile.svg"),
+    linear-gradient(to right, $Violet, $Violet);
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 100%;
+
+  position: relative;
+
+  @include respond(desktop) {
+    background-image: url("/src/images/bg-desktop.svg"),
+      linear-gradient(to right, $Violet, $Violet);
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__logo {
+    height: 4.5rem;
+    margin-top: 7rem;
+    display: inline-block;
+    @include respond(desktop) {
+      margin-top: 3rem;
+    }
+  }
+
+  &__main {
+    @include respond(desktop) {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    img {
+      width: 100%;
+      margin: 7rem 0;
+      transform: rotateY(180deg);
+      @include respond(desktop) {
+        margin-bottom: 0;
+      }
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      row-gap: 3rem;
+      text-align: center;
+      @include respond(desktop) {
+        text-align: right;
+      }
+      h1 {
+        width: 70%;
+        margin: 0 auto;
+        font-size: 2.4rem;
+        font-weight: 600;
+        line-height: 4rem;
+        @include respond(desktop) {
+          margin: 0;
+          width: 80%;
+        }
+      }
+
+      p {
+        font-size: 1.8rem;
+      }
+
+      a {
+        text-decoration: none;
+        color: $Violet;
+        padding: 1rem 7rem;
+        border-radius: 5rem;
+        background-color: #fff;
+        box-shadow: 0 1rem 2rem rgba($color: #000000, $alpha: 0.3);
+        align-self: center;
+        @include respond(desktop) {
+          align-self: flex-start;
+        }
+        &:hover {
+          background-color: $Soft-Magenta;
+          transform: translateY(0.5rem);
+          color: #fff;
+          box-shadow: 0 1rem 2rem rgba($color: #000000, $alpha: 0.1);
+        }
+      }
+    }
+  }
+  &__social {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 12rem;
+    align-self: center;
+    margin: 7rem 0 3rem;
+
+    @include respond(desktop) {
+      margin-top: 0;
+      align-self: flex-end;
+    }
+    a {
+      display: inline-block;
+      width: 2.4rem;
+      height: 2.4rem;
+      fill: $Soft-Magenta;
+    }
+  }
+}
